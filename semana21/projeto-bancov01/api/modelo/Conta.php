@@ -1,9 +1,16 @@
 <?php
 
 class Conta{
-	public int $numero;
-	public string $titular;
+	private int $numero = 0;
+	private Cliente $titular;
 	private float $saldo = 0;
+
+	public function __construct( int $numero, Cliente $cliente ){
+		if( !( $numero > 0) )
+			return;
+		$this->numero = $numero;
+		$this->titular = $cliente;
+	}
 
 	// Métodos acessores
 	/**
@@ -12,29 +19,14 @@ class Conta{
 	public function getNumero():int{
 		return $this->numero;
 	}
-	/**
-	 * @param int $numero
-	 * @return void
-	 * */
-	public function setNumero( int $numero ):void{
-		if ( !$numero > 0 )
-			return;
-		$this->numero = $numero;
-	}
 
-	public function getTitular():string{
+	public function getTitular():Cliente{
 		return $this->titular;
-	}
-	public function setTitular( string $titular ):void{
-		if ( strlen( $titular ) < 3 )
-			return;
-		$this->titular = $titular;
 	}
 
 	public function getSaldo():float{
 		return $this->saldo;
 	}
-
 
 	public function saca( float $valor ):bool{
 		if( $valor <= 0 || $valor > $this->saldo )
@@ -57,8 +49,11 @@ class Conta{
 	}
 
 	public function exibeDados():void{
-		echo "Número: {$this->numero}<br/>";
-		echo "Titular: {$this->titular}<br/>";
-		echo "Saldo: {$this->saldo}<br/>";
+		$ul = '<ul>';
+		$ul .= "<li><b>Número da conta: </b>{$this->getNumero()}</li>";
+		$ul .= "<li><b>Informações do titular da conta: </b>{$this->getTitular()->exibeDados()}</li>";
+		$ul .= "<li><b>Saldo da conta: </b>{$this->getSaldo()}</li>";
+		$ul .= '</ul>';
+		echo $ul;
 	}
 }

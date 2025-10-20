@@ -1,11 +1,41 @@
 <?php
 
 class Filme{
-	public string $titulo;
-	public int $anoDeLancamento;
-	public float $somaDasAvaliacoes = 0;
-	public int $totalDeAvaliacoes = 0;
-	public bool $incluidoNoPlano = false;
+	private string $titulo;
+	private int $anoDeLancamento;
+	private float $somaDasAvaliacoes = 0;
+	private int $totalDeAvaliacoes = 0;
+	private bool $incluidoNoPlano = false;
+
+	public function getTitulo():string{
+		return $this->titulo;
+	}
+	public function setTitulo( string $titulo ):void{
+		$this->titulo  = $titulo;
+	}
+
+	public function getAnoDeLancamento():int{
+		return $this->anoDeLancamento;
+	}
+	public function setAnoDeLancamento( int $anoDeLancamento ){
+		if( $anoDeLancamento < 1960 ){
+			echo "Só trabalhamos com filmes a partir de 1960.";
+			return;
+		}
+		$this->anoDeLancamento = $anoDeLancamento;
+	}
+
+	public function getSomaDasAvaliacoes():int{
+		return $this->somaDasAvaliacoes;
+	}
+	public function getTotalDeAvaliacoes():int{
+		return $this->totalDeAvaliacoes;
+	}
+
+	public function isIncluidoNoPlano():bool{
+		return $this->incluidoNoPlano;
+	}
+
 
 	public function exibeFichaTecnica():void{
 		echo "Título: {$this->titulo}<br/>";
