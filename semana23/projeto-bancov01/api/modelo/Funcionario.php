@@ -22,6 +22,8 @@ class Funcionario {
         $this->salario = $salario;
         $this->ativo = true;
         $this->dataNascimento = $dataNascimento;
+        if( isset ( $cpf ) && $this->validaCpf( $cpf ))
+            $this->cpf = $cpf;
         if( isset( $nome ) )
             $this->nome = $nome;
     }
